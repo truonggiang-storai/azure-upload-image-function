@@ -70,8 +70,9 @@ namespace UploadAndResize
                                 image.Save(output, encoder);
                                 output.Position = 0;
 
+                                var filePath = Path.GetDirectoryName(blobName);
                                 var newBlobNameWithoutExtension = Path.GetFileNameWithoutExtension(blobName);
-                                var newBlobName = newBlobNameWithoutExtension + "_w" + newWidth + extension;
+                                var newBlobName = filePath + "/" + newBlobNameWithoutExtension + "_w" + newWidth + extension;
                                 var resizeBlob = blobClient.GetBlobClient(newBlobName);
                                 await resizeBlob.UploadAsync(output);
                             }
